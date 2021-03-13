@@ -41,12 +41,12 @@ function renderOptionPanel() {
     
     let render_str = "";
     let option_id = 0;
-    skill_type_string.forEach(function(row) {
-        row.forEach(function(skill) {
+    skill_type_string.forEach(function(row, i) {
+        row.forEach(function(skill, j) {
             if(Object.keys(option_obj).includes(skill))
             {
                 render_str += "<div class='row option-row'>";
-                render_str += "     <div class='col-12 col-md-12 col-lg-4 option-text'>"+skill+"</div>";
+                render_str += "     <div class='col-12 col-md-12 col-lg-4 option-text'>"+skill_type_string_en[i][j]+"</div>";
                 option_text.forEach(function(text, j){
                     render_str += "     <div class='col-12 col-md-4 col-lg-2 btn-shell'><input type='checkbox' class='filter' id='option-"+(option_id*option_text.length+j)+"' "+(option_obj[skill][j] ? 'checked': '')+"><label class='p-1 w-100 text-center option-btn' for='option-"+(option_id*option_text.length+j)+"'>"+text+"</label></div>";
                 })
@@ -608,7 +608,7 @@ function renderMonsterImage(monster, tooltip_content) {
         <div class='col-3 col-md-2 col-lg-1 result'>
             <img class='monster_img' src='../tos_tool_data/img/monster/${monster.id}.png' onerror='this.src="../tos_tool_data/img/monster/noname_${attr_zh_to_en[monster_attr]}.png"' tabindex=${monster.id.toString().replace('?', '')} data-toggle='popover' data-title='' data-content="${tooltip_content}"></img>
             <div class='monsterId'>
-                <a href='https://tos.fandom.com/zh/wiki/${monster.id}' target='_blank'>${paddingZeros(monster.id, 3)}</a>
+                <a href='https://tos.fandom.com/en/wiki/${monster.id}' target='_blank'>${paddingZeros(monster.id, 3)}</a>
             </div>
         </div>
     `;
