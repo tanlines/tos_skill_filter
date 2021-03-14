@@ -6,6 +6,11 @@ let or_filter = true;
 let sort_by = 'id';
 let sort_by_method = [['id', '依編號排序'], ['charge', '依 CD/EP 排序'], ['attribute', '依屬性排序'], ['race', '依種族排序']];
 let theme = 'normal';
+let owned_cards = {};
+$.getJSON('https://checkupapi.tosgame.com/api/inventoryReview/getUserProfile?uid=29490729&includeInventory=true&token=eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOjUyMzI2MjcxLCJuYW1lIjoi44Ot44Oc44OD44OIIiwiY2FtcGFpZ25Mb2dpbkRheXMiOjEsImxldmVsIjoyNywicm9sZSI6MCwiaWF0IjoxNjE1NjkwNzk4LCJleHAiOjE2MTU3NzcxOTgsImlzcyI6Im1hZGhlYWQifQ.LVov_pXGaznODEG1bKSqo01QX8aled5LfKmy8tee6ogNZYtcoSIjt1wdUFIXCaVTqZpoHwsi_BZ6ZeJSiNFf6w', function(data) {
+    // JSON result in `data` variable
+	owned_cards = data["cards"];
+});
 
 $(document).ready(function() {
     init();
@@ -605,6 +610,14 @@ function renderMonsterImage(monster, tooltip_content) {
     }).attribute;
 	
 	let cd_str = '';
+	
+	const owned = owned_cards.find((element) => {
+		return element.id == monster.id;
+	})
+	
+	if (owned) {
+		cd_str += "AAASD";
+	}
 
 	$.each(monster.nums, (num_index, skill_number) => {
 		if (cd_str) {
