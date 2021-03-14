@@ -604,14 +604,19 @@ function renderMonsterImage(monster, tooltip_content) {
         return element.id == monster.id;
     }).attribute;
 	
-	const skill = monster_data.find((element) => {
-        return element.id == monster.id;
-    }).skill;
 	let cd_str = '';
-	$.each(skill, (index, skill) => {
+
+	$.each(monster.nums, (num_index, skill_number) => {
+		if (cd_str) {
+			cd_str += "<br>";
+		}
+		const skill = monster_data.find((element) => {
+			return element.id == monster.id;
+		}).skill[skill_number];
+		cd_str += skill.charge + " ";
 		cd_str += 'reduce' in skill ? skill.num+" → "+(skill.num-skill.reduce) : skill.num <= 0 ? '-' : skill.num;
 	});
-    
+	
     return `
         <div class='col-3 col-md-2 col-lg-1 result'>
             <img class='monster_img' src='../tos_tool_data/img/monster/${monster.id}.png' onerror='this.src="../tos_tool_data/img/monster/noname_${attr_zh_to_en[monster_attr]}.png"' tabindex=${monster.id.toString().replace('?', '')} data-toggle='popover' data-title='' data-content="${tooltip_content}"></img>
