@@ -41,14 +41,14 @@ function renderOptionPanel() {
     
     let render_str = "";
     let option_id = 0;
-    skill_type_string.forEach(function(row, i) {
-        row.forEach(function(skill, j) {
+    skill_type_string.forEach(function(row) {
+        row.forEach(function(skill) {
             if(Object.keys(option_obj).includes(skill))
             {
                 render_str += "<div class='row option-row'>";
-                render_str += "     <div class='col-12 col-md-12 col-lg-4 option-text'>"+skill_type_string_en[i][j]+"</div>";
-                option_text.forEach(function(text, k){
-                    render_str += "     <div class='col-12 col-md-4 col-lg-2 btn-shell'><input type='checkbox' class='filter' id='option-"+(option_id*option_text.length+k)+"' "+(option_obj[skill][k] ? 'checked': '')+"><label class='p-1 w-100 text-center option-btn' for='option-"+(option_id*option_text.length+k)+"'>"+skill_type_string_en[i][j]+"</label></div>";
+                render_str += "     <div class='col-12 col-md-12 col-lg-4 option-text'>"+skill+"</div>";
+                option_text.forEach(function(text, j){
+                    render_str += "     <div class='col-12 col-md-4 col-lg-2 btn-shell'><input type='checkbox' class='filter' id='option-"+(option_id*option_text.length+j)+"' "+(option_obj[skill][j] ? 'checked': '')+"><label class='p-1 w-100 text-center option-btn' for='option-"+(option_id*option_text.length+j)+"'>"+text+"</label></div>";
                 })
                 render_str += "<hr>";
                 render_str += "</div>";
@@ -603,12 +603,24 @@ function renderMonsterImage(monster, tooltip_content) {
     const monster_attr = monster_data.find((element) => {
         return element.id == monster.id;
     }).attribute;
+	
+	const skill = monster_data.find((element) => {
+        return element.id == monster.id;
+    }).skill[skill_number];
+	
+	let cd_str = 'reduce' in skill ? skill.num+" → "+(skill.num-skill.reduce) : skill.num <= 0 ? '-' : skill.num;
     
     return `
         <div class='col-3 col-md-2 col-lg-1 result'>
             <img class='monster_img' src='../tos_tool_data/img/monster/${monster.id}.png' onerror='this.src="../tos_tool_data/img/monster/noname_${attr_zh_to_en[monster_attr]}.png"' tabindex=${monster.id.toString().replace('?', '')} data-toggle='popover' data-title='' data-content="${tooltip_content}"></img>
+			<div class='monsterId'>
+                <a href='https://tos.fandom.com/en/wiki/${monster.id}' target='_blank'>${cd_str}</a>
+            </div>
             <div class='monsterId'>
                 <a href='https://tos.fandom.com/en/wiki/${monster.id}' target='_blank'>${paddingZeros(monster.id, 3)}</a>
+            </div>
+			<div class='monsterId'>
+                <a href='https://tos.fandom.com/zh/wiki/${monster.id}' target='_blank'>${paddingZeros(monster.id, 3)}</a>
             </div>
         </div>
     `;
