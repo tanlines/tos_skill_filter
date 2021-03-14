@@ -617,7 +617,7 @@ function renderMonsterImage(monster, tooltip_content) {
 	})
 	
 	if (!owned) {
-		darken = " darken";
+		darken = "filter: brightness(0.5);";
 	}
 
 	$.each(monster.nums, (num_index, skill_number) => {
@@ -633,7 +633,7 @@ function renderMonsterImage(monster, tooltip_content) {
 	
     return `
         <div class='col-3 col-md-2 col-lg-1 result'>
-            <img class='monster_img${darken}' src='../tos_tool_data/img/monster/${monster.id}.png' onerror='this.src="../tos_tool_data/img/monster/noname_${attr_zh_to_en[monster_attr]}.png"' tabindex=${monster.id.toString().replace('?', '')} data-toggle='popover' data-title='' data-content="${tooltip_content}"></img>
+            <img style='${darken}' class='monster_img' src='../tos_tool_data/img/monster/${monster.id}.png' onerror='this.src="../tos_tool_data/img/monster/noname_${attr_zh_to_en[monster_attr]}.png"' tabindex=${monster.id.toString().replace('?', '')} data-toggle='popover' data-title='' data-content="${tooltip_content}"></img>
 			<div class='monsterId'>
                 <a href='https://tos.fandom.com/en/wiki/${monster.id}' target='_blank'>${cd_str}</a>
             </div>
