@@ -606,9 +606,11 @@ function renderMonsterImage(monster, tooltip_content) {
 	
 	const skill = monster_data.find((element) => {
         return element.id == monster.id;
-    }).skill[skill_number];
-	
-	let cd_str = 'reduce' in skill ? skill.num+" → "+(skill.num-skill.reduce) : skill.num <= 0 ? '-' : skill.num;
+    }).skill;
+	let cd_str = '';
+	$.each(skill, (index, skill) => {
+		cd_str += 'reduce' in skill ? skill.num+" → "+(skill.num-skill.reduce) : skill.num <= 0 ? '-' : skill.num;
+	});
     
     return `
         <div class='col-3 col-md-2 col-lg-1 result'>
