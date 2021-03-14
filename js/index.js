@@ -47,8 +47,8 @@ function renderOptionPanel() {
             {
                 render_str += "<div class='row option-row'>";
                 render_str += "     <div class='col-12 col-md-12 col-lg-4 option-text'>"+skill_type_string_en[i][j]+"</div>";
-                option_text.forEach(function(text, j){
-                    render_str += "     <div class='col-12 col-md-4 col-lg-2 btn-shell'><input type='checkbox' class='filter' id='option-"+(option_id*option_text.length+j)+"' "+(option_obj[skill][j] ? 'checked': '')+"><label class='p-1 w-100 text-center option-btn' for='option-"+(option_id*option_text.length+j)+"'>"+text+"</label></div>";
+                option_text.forEach(function(text, k){
+                    render_str += "     <div class='col-12 col-md-4 col-lg-2 btn-shell'><input type='checkbox' class='filter' id='option-"+(option_id*option_text.length+k)+"' "+(option_obj[skill][k] ? 'checked': '')+"><label class='p-1 w-100 text-center option-btn' for='option-"+(option_id*option_text.length+k)+"'>"+skill_type_string_en[i][j]+"</label></div>";
                 })
                 render_str += "<hr>";
                 render_str += "</div>";
