@@ -31,6 +31,10 @@ function refreshOwnedCards()
     // JSON result in `data` variable
 		owned_cards = data["cards"];
 	});
+	
+	if (owned_cards.length == 0) {
+		alert("Couldn't load player cards");
+	}
 }
 
 $(document).ready(function() {
