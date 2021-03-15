@@ -14,7 +14,7 @@ function refreshOwnedCards()
 {
 	new_player_id = document.getElementById("player-id-input").value;
 	
-	if (player_id === new_player_id) {
+	if (owned_cards.length > 0 && player_id === new_player_id) {
 		return;
 	}
 	
