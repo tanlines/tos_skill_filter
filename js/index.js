@@ -20,16 +20,22 @@ function refreshOwnedCards()
 	
 	player_id = new_player_id;
 	
-	urll = "https://checkupapi.tosgame.com/user/login?token=&uid=52326271&aid=872594&labels={%22serviceType%22:%22tosCampaign%22}"
-	$.getJSON(urll, function(data) {
-    // JSON result in `data` variable
-		token = data["token"];
-	});
+	if (!token) {
+		urll = "https://checkupapi.tosgame.com/user/login?token=&uid=52326271&aid=872594&labels={%22serviceType%22:%22tosCampaign%22}"
+		$.getJSON(urll, function(data) {
+		// JSON result in `data` variable
+			if (data["token"]) {
+				token = data["token"];
+			}
+		});
+	}
 	url = "https://checkupapi.tosgame.com/api/inventoryReview/getUserProfile?uid=" + player_id + "&includeInventory=true&token="+token;
 	
     $.getJSON(url, function(data) {
     // JSON result in `data` variable
-		owned_cards = data["cards"];
+		if (data["cards"]) {
+			owned_cards = data["cards"];
+		}
 	});
 	
 	if (owned_cards.length == 0) {
