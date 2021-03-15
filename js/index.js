@@ -20,7 +20,7 @@ function refreshOwnedCards()
 	
 	player_id = new_player_id;
 	
-	url = "https://checkupapi.tosgame.com/user/login?token=&uid="+ player_id +"&aid=872594&labels={%22serviceType%22:%22tosCampaign%22}"
+	url = "https://checkupapi.tosgame.com/user/login?token=&uid=52326271&aid=872594&labels={%22serviceType%22:%22tosCampaign%22}"
 	$.getJSON(url, function(data) {
     // JSON result in `data` variable
 		token = data["token"];
