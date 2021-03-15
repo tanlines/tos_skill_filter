@@ -18,6 +18,7 @@ function refreshOwnedCards()
 		return;
 	}
 	
+	owned_cards = [];
 	player_id = new_player_id;
 	
 	if (!token) {
@@ -38,9 +39,9 @@ function refreshOwnedCards()
 		}
 	});
 	
-	if (owned_cards.length == 0) {
-		alert("Couldn't load player cards");
-	}
+	//if (owned_cards.length == 0) {
+	//	alert("Couldn't load player cards");
+	//}
 }
 
 $(document).ready(function() {
