@@ -7,6 +7,7 @@ let sort_by = 'id';
 let sort_by_method = [['id', '依編號排序'], ['charge', '依 CD/EP 排序'], ['attribute', '依屬性排序'], ['race', '依種族排序']];
 let theme = 'normal';
 let owned_cards = {};
+let token = '';
 let player_id = '';
 
 function refreshOwnedCards()
@@ -19,7 +20,15 @@ function refreshOwnedCards()
 	
 	player_id = new_player_id;
 	
-	url = "https://checkupapi.tosgame.com/api/inventoryReview/getUserProfile?uid=" + player_id + "&includeInventory=true&token=eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOjUyMzI2MjcxLCJuYW1lIjoi44Ot44Oc44OD44OIIiwiY2FtcGFpZ25Mb2dpbkRheXMiOjEsImxldmVsIjoyNywicm9sZSI6MCwiaWF0IjoxNjE1NjkwNzk4LCJleHAiOjE2MTU3NzcxOTgsImlzcyI6Im1hZGhlYWQifQ.LVov_pXGaznODEG1bKSqo01QX8aled5LfKmy8tee6ogNZYtcoSIjt1wdUFIXCaVTqZpoHwsi_BZ6ZeJSiNFf6w";
+	url = "https://checkupapi.tosgame.com/user/login?token=&uid="+ player_id +"&aid=872594&labels={%22serviceType%22:%22tosCampaign%22}"
+	$.getJSON(url, function(data) {
+    // JSON result in `data` variable
+		token = data["token"];
+	});
+	if (!token) {
+		return
+	}
+	url = "https://checkupapi.tosgame.com/api/inventoryReview/getUserProfile?uid=" + player_id + "&includeInventory=true&token="+token;
 	
     $.getJSON(url, function(data) {
     // JSON result in `data` variable
